@@ -125,6 +125,12 @@ new Test.Unit.Runner({
     this.assertActualCalls(1, 0);
   },
   
+  testAssertExpectationsNotCalledAndNotExpected: function() {
+    Moksi.expects(Person, 'name', {times: 0});
+    Moksi.assertExpectations(this.mockTestCase);
+    this.assertActualCalls(0, 0);
+  },
+  
   testAssertExpectationsCalledTooOften: function() {
     Moksi.expects(Person, 'name');
     
