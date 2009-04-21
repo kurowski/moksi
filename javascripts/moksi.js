@@ -28,7 +28,7 @@ var Moksi = {
   
   expects: function(object, functionName, options) {
     options = options || {};
-    options.times = (options.times != undefined) ? options.times : 1;
+    if (options.times == undefined) options.times = 1;
     
     this.expected[object] = this.expected[object] || {}
     this.expected[object][functionName] = [];
@@ -39,6 +39,10 @@ var Moksi = {
       Moksi.called[object][functionName] = Moksi.called[object][functionName] || [];
       Moksi.called[object][functionName].push(this[functionName].arguments);
     });
+  },
+  
+  rejects: function(object, functionName) {
+    this.expects(object, functionName, {times: 0});
   },
   
   revert: function() {
